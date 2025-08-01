@@ -1,0 +1,31 @@
+# Replit configuration for Claude Code UI Cloud
+
+[nix]
+channel = "stable-22_11"
+
+[deployment]
+run = ["sh", "-c", "npm run build && node server/cloud-server.js"]
+deploymentTarget = "cloudrun"
+
+[env]
+NODE_ENV = "production"
+CLOUD_MODE = "true"
+PORT = "3000"
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[languages.javascript]
+pattern = "**/{*.js,*.jsx,*.ts,*.tsx,*.mjs}"
+syntax = "javascript"
+
+[languages.javascript.languageServer]
+start = "typescript-language-server --stdio"
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix"]
+
+[auth]
+pageEnabled = false
+buttonEnabled = false

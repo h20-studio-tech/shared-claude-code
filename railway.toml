@@ -1,0 +1,24 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+healthcheckPath = "/api/config"
+healthcheckTimeout = 30
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[environments.production]
+variables = [
+  "NODE_ENV=production",
+  "CLOUD_MODE=true",
+  "PORT=3000"
+]
+
+# Railway automatically provides:
+# - RAILWAY_VOLUME_MOUNT_PATH for persistent storage
+# - DATABASE_URL if PostgreSQL addon is used
+# - REDIS_URL if Redis addon is used
+
+# Set these via Railway dashboard:
+# JWT_SECRET (generate a secure random string)
+# API_KEY (optional, for additional security)

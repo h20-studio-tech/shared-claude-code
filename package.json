@@ -10,7 +10,11 @@
     "client": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "npm run build && npm run server"
+    "start": "npm run build && npm run server",
+    "cloud": "node server/cloud-server.js",
+    "cloud-dev": "concurrently --kill-others \"npm run cloud\" \"npm run client\"",
+    "migrate": "node server/migrate-to-cloud.js",
+    "replit-setup": "./scripts/replit-setup.sh"
   },
   "keywords": [
     "claude",

@@ -1,0 +1,44 @@
+{
+  "version": 2,
+  "name": "claude-code-ui-cloud",
+  "builds": [
+    {
+      "src": "server/cloud-server.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["server/**", "dist/**"]
+      }
+    },
+    {
+      "src": "dist/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/server/cloud-server.js"
+    },
+    {
+      "src": "/ws/(.*)",
+      "dest": "/server/cloud-server.js"
+    },
+    {
+      "src": "/shared/(.*)",
+      "dest": "/dist/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/$1"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "CLOUD_MODE": "true"
+  },
+  "functions": {
+    "server/cloud-server.js": {
+      "maxDuration": 30
+    }
+  }
+}
